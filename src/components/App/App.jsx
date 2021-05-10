@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Header from '../Header/Header';
 import SearchBox from '../SearchBox/SearchBox';
@@ -6,7 +6,27 @@ import ResultsContainer from '../ResultsContainer/ResultsContainer';
 
 const name = require('@rstacruz/startup-name-generator');
 
-class App extends React.Component {
+//USE of hooks
+const App = () => {
+    const [headerText] = useState('Name it!');
+    const [headerExpanded, setHeaderExpanded] = useState(true);
+    const [suggestedNames, setSuggestedNames] = useState([]);
+
+    const handleInputChange = (inputText) => {
+        setHeaderExpanded(!inputText);
+        setSuggestedNames(inputText ? name(inputText) : []);
+    };
+
+    return (
+        <div>
+            <Header headerExpanded={headerExpanded} headerTitle={headerText} />
+            <SearchBox onInputChange={handleInputChange} />
+            <ResultsContainer suggestedNames={suggestedNames} />
+        </div>
+    );
+};
+
+/*class App extends React.Component {
     state = {
         headerText: 'Name it!',
         headerExpanded: true,
@@ -30,6 +50,6 @@ class App extends React.Component {
             </div>
         );
     }
-}
+}*/
 
 export default App;

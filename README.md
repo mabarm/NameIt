@@ -1,3 +1,3 @@
 # Name IT
 
-# Very cool project
+# A website where you can get name suggestions
